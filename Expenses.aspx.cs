@@ -135,7 +135,7 @@ namespace RestoExpense
                 }
             }
 
-            BindGrid(inventoryModel);
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
 
         protected void txtPurchaseDate_TextChanged(object sender, EventArgs e)

@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Page Not Found</title>
     <style>
         body {
@@ -89,13 +90,22 @@
     <script>
         function copyToClipboard() {
             const text = document.getElementById("link-text").innerText;
-            navigator.clipboard.writeText(text).then(() => {
+
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            showCopiedMessage();
+
+            function showCopiedMessage() {
                 const copiedMessage = document.getElementById("copied-message");
                 copiedMessage.style.display = "block";
                 setTimeout(() => {
                     copiedMessage.style.display = "none";
-                }, 2000); // Hide after 2 seconds
-            });
+                }, 2000);
+            }
         }
     </script>
 </head>
