@@ -31,6 +31,17 @@
                 $("#<%= txtPurchaseDate.ClientID %>").focus();
             });
         });
+        function showInformationPopup() {
+            $('#SmokeDiv1').show();
+            $('#InformationDiv').show();
+            $('#btnOk').focus();
+        }
+
+        function HideInformationPopup() {
+            $('#SmokeDiv1').hide();
+            $('#InformationDiv').hide();
+            window.location.href = "/Expenses";
+        }
     </script>
 
     <style>
@@ -67,7 +78,29 @@
             background-color: #f2f2f2;
             color: #495057;
         }
+        .modal {
+            position: fixed;
+            top: 200px;
+            left: 0;
+            z-index: 1050;
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            outline: 0;
+        }
 
+        .modal-content {
+            border-radius: 10px;
+            background-color: #ffa500;
+            color: white;
+        }
+
+        .modal-header, .modal-footer {
+            border: none;
+            display: inline;
+            text-align:center;
+        }
     </style>
 
     <div class="container my-4">
@@ -125,8 +158,26 @@
                 <asp:Label ID="lblInventoryTotal" runat="server" CssClass="ml-2" Font-Bold="true" Style="font-size: medium;"></asp:Label>
             </div>
             <div class="col-md-6 text-right">
-                <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" Font-Size="Medium" OnClick="btnSave_Click" />
+                <asp:Button ID="btnSave" runat="server" CssClass="btn btn-primary" Text="Save" Font-Size="Medium" OnClick="btnSave_Click"/>
             </div>
         </div>
     </div>
+    <div id="SmokeDiv1" style="position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+        background-color: #000; z-index: 2; opacity: 0.6; filter: alpha(opacity=60); display: none">
+    </div>
+    <div id="InformationDiv" class="pops modal" tabindex="-1" role="dialog" aria-labelledby="InformationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="InformationModalLabel" style="font-size: x-large; text-align: center;">Information!!!</h5>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <label runat="server" id="lblHeading1" style="color:white; font-size: medium;">Record Saved Successfully!!!</label>
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnOk" class="btn btn-secondary" style="font-size: small;" value="Ok" onclick="HideInformationPopup()" />
+            </div>
+        </div>
+    </div>
+</div>
 </asp:Content>

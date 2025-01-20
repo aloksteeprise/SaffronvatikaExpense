@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace RestoExpense
+namespace RestoExpense 
 {
     public partial class Expenses : System.Web.UI.Page
     {
@@ -122,20 +122,15 @@ namespace RestoExpense
 
                     inventoryModel.InventoryDate = txtPurchaseDate.Text;
 
-                    inventoryDataHandler.SaveInventoryList(inventoryModel);
-
                     if (txtAmount1.Text == "" && txtAmount2.Text == "" && txtAmount3.Text == "")
                     {
-                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "Confirmpopup", string.Format("alert('Please Enter Expense Details.');"), true);
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "Confirmpopup", string.Format("showInformationPopup();"), true);
                     }
-                    else
-                    {
-                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "Confirmpopup", string.Format("alert('Expense Details Saved Successfully.');"), true);
-                    }
+
+                    inventoryDataHandler.SaveInventoryList(inventoryModel);
+                    BindGrid(inventoryModel);
                 }
             }
-
-            Response.Redirect(Request.Url.AbsoluteUri);
         }
 
         protected void txtPurchaseDate_TextChanged(object sender, EventArgs e)
